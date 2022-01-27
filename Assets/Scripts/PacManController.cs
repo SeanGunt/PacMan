@@ -3,35 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PacManController : MonoBehaviour
-{
-    Rigidbody2D rigidbody2d;
-    public float speed;
-    float horizontal;
-    float vertical;
-    void Start()
-    {
-        rigidbody2d = GetComponent<Rigidbody2D>();
-    }
+{   
+    public float speedMultiplier;
+    private Vector2 direction;
 
-    void Update()
+    private void Start()
     {
 
     }
-    void FixedUpdate()
+
+    private void Update()
     {
-        // Code that makes Pac-man move //
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-        Vector2 move = new Vector2(horizontal, vertical);
-        Vector2 position = rigidbody2d.position;
-        
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            rigidbody2d.MovePosition(new Vector2 (position.x + speed * horizontal * Time.deltaTime , position.y));
+            direction = Vector2.up;
         }
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
-            rigidbody2d.MovePosition(new Vector2 (position.x , position.y + speed * vertical * Time.deltaTime));
+            direction = Vector2.down;
         }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            direction = Vector2.right;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            direction = Vector2.left;
+        }
+    }
+    private void FixedUpdate()
+    {
+        transform.position = new Vector2(transform.position.x + direction.x * speedMultiplier, transform.position.y + direction.y * speedMultiplier);
     }  
 }
