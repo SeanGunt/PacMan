@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PacManController : MonoBehaviour
 {
-    Rigidbody2D _rigidbody2D;
-    [SerializeField] float _speed = 3.0f;
+    Rigidbody2D rigidbody2d;
+    public float speed;
+    float horizontal;
+    float vertical;
     void Start()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -17,7 +19,19 @@ public class PacManController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector2 _position = _rigidbody2D.position;
-        _rigidbody2D.MovePosition(_position);
-    }
+        // Code that makes Pac-man move //
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+        Vector2 move = new Vector2(horizontal, vertical);
+        Vector2 position = rigidbody2d.position;
+        
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
+        {
+            rigidbody2d.MovePosition(new Vector2 (position.x + speed * horizontal * Time.deltaTime , position.y));
+        }
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        {
+            rigidbody2d.MovePosition(new Vector2 (position.x , position.y + speed * vertical * Time.deltaTime));
+        }
+    }  
 }
