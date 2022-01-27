@@ -10,14 +10,12 @@ public class PacManController : MonoBehaviour
     public Text livesText;
     public Text winText;
 
-    private int lives;
+    private int lives = 3;
 
-    private void Start()
+    private void Awake()
     {
-        livesText.text = "";
+        livesText.text = "Lives: " +  lives.ToString();
         winText.text = "";
-
-        lives = 3;
     }
 
     private void Update()
@@ -49,10 +47,10 @@ public class PacManController : MonoBehaviour
         if (collision.collider.tag == "Enemy")
         {
             lives = lives - 1;
+            livesText.text = "Lives: " + lives.ToString();
         }
 
-         livesText.text = "Lives: " + lives.ToString();
-        if (lives <=0)
+        if (lives <= 0)
         {
             winText.text = "You lose!";
         }
