@@ -6,18 +6,28 @@ using UnityEngine.UI;
 public class PacManController : MonoBehaviour
 {   
     public float speedMultiplier;
+
+    Rigidbody2D rigidbody2d;
     private Vector2 direction;
     public Text livesText;
     public Text winText;
 
     private int lives;
 
+    Animator animator;
+    AudioSource audioSource;
+
     private void Start()
     {
+        rigidbody2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
         livesText.text = "";
         winText.text = "";
 
         lives = 3;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
