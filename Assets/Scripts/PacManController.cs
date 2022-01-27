@@ -1,32 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PacManController : MonoBehaviour
 {   
     public float speedMultiplier;
     private Vector2 direction;
+    public Text livesText;
+    public Text winText;
+
+    private int lives;
 
     private void Start()
     {
+        livesText.text = "";
+        winText.text = "";
 
+        lives = 3;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             direction = Vector2.up;
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             direction = Vector2.down;
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             direction = Vector2.right;
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
             direction = Vector2.left;
         }
@@ -35,4 +43,23 @@ public class PacManController : MonoBehaviour
     {
         transform.position = new Vector2(transform.position.x + direction.x * speedMultiplier, transform.position.y + direction.y * speedMultiplier);
     }  
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Enemy")
+        {
+            lives = lives - 1;
+        }
+
+         livesText.text = "Lives: " + lives.ToString();
+        if (lives <=0)
+        {
+            winText.text = "You lose!";
+        }
+
+        if (lives == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
