@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PacManController : MonoBehaviour
 {   
     public float speedMultiplier;
     private Vector2 direction;
     public Text livesText;
-    public Text gameOverText;
     public Text scoreText;
     private int lives = 3;
     private int score = 0;
@@ -24,7 +24,6 @@ public class PacManController : MonoBehaviour
 
         livesText.text = "Lives: " + lives.ToString();
         scoreText.text = score.ToString();
-        gameOverText.text = "";
     }
 
     private void Update()
@@ -45,6 +44,7 @@ public class PacManController : MonoBehaviour
         {
             direction = Vector2.left;
         }
+        
     }
     private void FixedUpdate()
     {
@@ -59,11 +59,12 @@ public class PacManController : MonoBehaviour
             lives = lives - 1;
             livesText.text = "Lives: " + lives.ToString();
         }
-        if (lives <= 0)
-        {
-            gameOverText.text = "You lose!";
-            Destroy(this.gameObject);
-        }
+         
+            if (lives <= 0)
+            {
+                if (SceneManager.GetActiveScene().buildIndex == 0)
+                        SceneManager.LoadScene(1);
+            }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
