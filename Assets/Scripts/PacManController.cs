@@ -75,5 +75,9 @@ public class PacManController : MonoBehaviour
             scoreText.text = score.ToString();
             Destroy(other.gameObject);
         }
+        if (other.tag == "PowerUp")
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
