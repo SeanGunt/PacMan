@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Dot
   - PowerUp
+  - PacMan
+  - Ghost1
   layers:
   - Default
   - TransparentFX

@@ -341,6 +341,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &71982929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 71982930}
+  m_Layer: 0
+  m_Name: Ghost 1 Start
+  m_TagString: Ghost1
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &71982930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71982929}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2, y: 0.44, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &148040215
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158919216}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.47, z: 0}
+  m_LocalPosition: {x: -1.14, y: 0.47, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 1965524121}
@@ -574,7 +604,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.01
+  m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -595,8 +625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5044cefe70b14be4fb431b25ea3729c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 852653413}
-  speed: 4.75
   nextWaypointDistance: 1.2
 --- !u!114 &158919222
 MonoBehaviour:
@@ -1672,7 +1700,7 @@ GameObject:
   - component: {fileID: 852653416}
   m_Layer: 0
   m_Name: PacMan Placeholder
-  m_TagString: Untagged
+  m_TagString: PacMan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

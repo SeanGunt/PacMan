@@ -5,8 +5,8 @@ using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform target;
-    public float speed;
+    public static Transform target;
+    public static float enemySpeed = 475f;
     public float nextWaypointDistance = 3f;
     Path path;
     int currentWaypoint = 0;
@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour
     Rigidbody2D rigidbody2d;
     void Awake()
     {
+        target = GameObject.FindWithTag("PacMan").transform;
         seeker = GetComponent<Seeker>();
         rigidbody2d = GetComponent<Rigidbody2D>();
 
@@ -53,7 +54,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rigidbody2d.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+        Vector2 force = direction * enemySpeed * Time.deltaTime;
 
         float distance = Vector2.Distance(rigidbody2d.position, path.vectorPath[currentWaypoint]);
 

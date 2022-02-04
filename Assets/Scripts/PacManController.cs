@@ -12,20 +12,19 @@ public class PacManController : MonoBehaviour
     public Text scoreText;
     private int lives = 3;
     private int score = 0;
-    Rigidbody2D rigidbody2d;
+    private float powerupTimer = 5.0f;
+    bool powered;
     Animator animator;
     AudioSource audioSource;
 
     private void Awake()
     {
-        rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
         livesText.text = "Lives: " + lives.ToString();
         scoreText.text = score.ToString();
     }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -44,7 +43,11 @@ public class PacManController : MonoBehaviour
         {
             direction = Vector2.left;
         }
-        
+
+        if (powered)
+        {
+            Powered();
+        }
     }
     private void FixedUpdate()
     {
@@ -52,9 +55,23 @@ public class PacManController : MonoBehaviour
         transform.position.y + direction.y * Time.deltaTime * speedMultiplier);
     }  
 
+    private void Powered()
+    {
+        powerupTimer -= Time.deltaTime;
+        EnemyAI.enemySpeed = 150f;
+        EnemyAI.target = GameObject.FindWithTag("Ghost1").transform;
+            if (powerupTimer <= 0)
+            {
+                powered = false;
+                powerupTimer = 5.0f;
+                EnemyAI.enemySpeed = 475f;
+                EnemyAI.target = GameObject.FindWithTag("PacMan").transform;
+            }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Enemy")
+        if (collision.collider.tag == "Enemy" && !powered)
         {
             lives = lives - 1;
             livesText.text = "Lives: " + lives.ToString();
@@ -78,6 +95,7 @@ public class PacManController : MonoBehaviour
         if (other.tag == "PowerUp")
         {
             Destroy(other.gameObject);
+            powered = true;
         }
     }
 }
