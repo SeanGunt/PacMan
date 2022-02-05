@@ -70,6 +70,7 @@ public class PacManController : MonoBehaviour
                 EnemyAI.enemySpeed = 900f;
                 EnemyAI.target = GameObject.FindWithTag("PacMan").transform;
                 EnemyAI.enemySpriteRenderer.color = EnemyAI.myRed;
+                EnemyAI.boxCollider2d.enabled = true;
             }
     }
 
@@ -95,6 +96,18 @@ public class PacManController : MonoBehaviour
         if (other.tag == "Enemy" && powered)
         {
             EnemyAI.enemySpeed = 2000f;
+            powerupTimer = 5.0f;
+            score += 50;
+            scoreText.text = score.ToString();
+            EnemyAI.boxCollider2d.enabled = false;
+        }
+        if (other.tag == "TelLeft")
+        {
+            this.transform.position = new Vector2(14.0f, 0.0f);
+        }
+        if (other.tag == "TelRight")
+        {
+            this.transform.position = new Vector2(-14.0f, 0.0f);
         }
     }
 }

@@ -9,6 +9,8 @@ TagManager:
   - PowerUp
   - PacMan
   - Ghost1
+  - TelLeft
+  - TelRight
   layers:
   - Default
   - TransparentFX
