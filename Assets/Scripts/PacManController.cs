@@ -48,6 +48,11 @@ public class PacManController : MonoBehaviour
         {
             Powered();
         }
+        if (lives <= 0)
+            {
+                if (SceneManager.GetActiveScene().buildIndex == 0)
+                        SceneManager.LoadScene(1);
+            }
     }
     private void FixedUpdate()
     {
@@ -58,29 +63,15 @@ public class PacManController : MonoBehaviour
     private void Powered()
     {
         powerupTimer -= Time.deltaTime;
-        EnemyAI.enemySpeed = 150f;
         EnemyAI.target = GameObject.FindWithTag("Ghost1").transform;
+        EnemyAI.enemySpriteRenderer.color = EnemyAI.myBlue;
             if (powerupTimer <= 0)
             {
                 powered = false;
                 powerupTimer = 5.0f;
-                EnemyAI.enemySpeed = 475f;
+                EnemyAI.enemySpeed = 900f;
                 EnemyAI.target = GameObject.FindWithTag("PacMan").transform;
-            }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.tag == "Enemy" && !powered)
-        {
-            lives = lives - 1;
-            livesText.text = "Lives: " + lives.ToString();
-        }
-         
-            if (lives <= 0)
-            {
-                if (SceneManager.GetActiveScene().buildIndex == 0)
-                        SceneManager.LoadScene(1);
+                EnemyAI.enemySpriteRenderer.color = EnemyAI.myRed;
             }
     }
 
@@ -95,7 +86,17 @@ public class PacManController : MonoBehaviour
         if (other.tag == "PowerUp")
         {
             Destroy(other.gameObject);
+            EnemyAI.enemySpeed = 300f;
             powered = true;
+        }
+        if (other.tag == "Enemy" && !powered)
+        {
+            lives -= 1;
+            livesText.text = "Lives: " + lives.ToString();
+        }
+        if (other.tag == "Enemy" && powered)
+        {
+            EnemyAI.enemySpeed = 2000f;
         }
     }
 }
