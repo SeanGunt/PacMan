@@ -17,6 +17,9 @@ public class PacManController : MonoBehaviour
     Animator animator;
     AudioSource audioSource;
     Vector2 startPos;
+    public AudioClip pickup;
+    public AudioClip loseMusic;
+    public GameObject pellets;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -32,30 +35,40 @@ public class PacManController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             direction = Vector2.up;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 90.0f);
         }
         else if (Input.GetKeyDown(KeyCode.S)|| Input.GetKeyDown(KeyCode.DownArrow))
         {
             direction = Vector2.down;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, -90.0f);
         }
         else if (Input.GetKeyDown(KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow))
         {
             direction = Vector2.right;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
         }
         else if (Input.GetKeyDown(KeyCode.A)|| Input.GetKeyDown(KeyCode.LeftArrow))
         {
             direction = Vector2.left;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 180.0f);
         }
 
+        // Pickup power.
         if (powered)
         {
             Powered();
         }
+
+        // Lose requirement.
         if (lives <= 0)
         {
-            if (SceneManager.GetActiveScene().buildIndex == 0)
-            {
-                SceneManager.LoadScene(1);
-            }
+            SceneManager.LoadScene(1);
+        }
+
+        // Win requirement.
+        if (!GameObject.FindWithTag("Dot"))
+        {
+            SceneManager.LoadScene(2);
         }
     }
     private void FixedUpdate()
@@ -64,6 +77,7 @@ public class PacManController : MonoBehaviour
         transform.position.y + direction.y * Time.deltaTime * speedMultiplier);
     }  
 
+    //  Code when you pickup a powerup.
     private void Powered()
     {
         powerupTimer -= Time.deltaTime;
@@ -80,6 +94,7 @@ public class PacManController : MonoBehaviour
             }
     }
 
+    // Resets positions of both the ghost and pacman.
     public void ResetPos()
     {
         this.transform.position = startPos;
@@ -100,6 +115,7 @@ public class PacManController : MonoBehaviour
             Destroy(other.gameObject);
             EnemyAI.enemySpeed = 300f;
             powered = true;
+            audioSource.PlayOneShot(pickup);
         }
         if (other.tag == "Enemy" && !powered)
         {
@@ -110,10 +126,10 @@ public class PacManController : MonoBehaviour
         if (other.tag == "Enemy" && powered)
         {
             EnemyAI.enemySpeed = 2000f;
+            EnemyAI.boxCollider2d.enabled = false;
             powerupTimer = 5.0f;
             score += 50;
             scoreText.text = score.ToString();
-            EnemyAI.boxCollider2d.enabled = false;
         }
         if (other.tag == "TelLeft")
         {
