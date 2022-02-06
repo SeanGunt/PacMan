@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic; 
 
 public class PacManController : MonoBehaviour
 {   
@@ -14,7 +16,7 @@ public class PacManController : MonoBehaviour
     bool powered;
     Animator animator;
     AudioSource audioSource;
-
+    Vector2 startPos;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -22,6 +24,8 @@ public class PacManController : MonoBehaviour
 
         livesText.text = "Lives: " + lives.ToString();
         scoreText.text = score.ToString();
+        
+        startPos = this.transform.position;
     }
     private void Update()
     {
@@ -47,10 +51,12 @@ public class PacManController : MonoBehaviour
             Powered();
         }
         if (lives <= 0)
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 0)
             {
-                if (SceneManager.GetActiveScene().buildIndex == 0)
-                        SceneManager.LoadScene(1);
+                SceneManager.LoadScene(1);
             }
+        }
     }
     private void FixedUpdate()
     {
@@ -67,13 +73,20 @@ public class PacManController : MonoBehaviour
             {
                 powered = false;
                 powerupTimer = 5.0f;
-                EnemyAI.enemySpeed = 900f;
+                EnemyAI.enemySpeed = 1000f;
                 EnemyAI.target = GameObject.FindWithTag("PacMan").transform;
                 EnemyAI.enemySpriteRenderer.color = EnemyAI.myRed;
                 EnemyAI.boxCollider2d.enabled = true;
             }
     }
 
+    public void ResetPos()
+    {
+        this.transform.position = startPos;
+        GameObject.FindWithTag("Enemy").transform.position = EnemyAI.startPos;
+        direction = Vector2.zero;
+        
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Dot")
@@ -92,6 +105,7 @@ public class PacManController : MonoBehaviour
         {
             lives -= 1;
             livesText.text = "Lives: " + lives.ToString();
+            ResetPos();
         }
         if (other.tag == "Enemy" && powered)
         {

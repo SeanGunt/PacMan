@@ -4,7 +4,7 @@ using Pathfinding;
 public class EnemyAI : MonoBehaviour
 {
     public static Transform target;
-    public static float enemySpeed = 900f;
+    public static float enemySpeed = 1000f;
     public float nextWaypointDistance = 3f;
     Path path;
     int currentWaypoint = 0;
@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     public static SpriteRenderer enemySpriteRenderer;
     public static Color myRed;
     public static Color myBlue;
+    public static Vector2 startPos;
 
     void Awake()
     {
@@ -27,6 +28,8 @@ public class EnemyAI : MonoBehaviour
         myRed = new Color(1f,0.25f,0.15f,1f);
         myBlue = new Color(0.25f,0.25f,0.75f,1f);
         enemySpriteRenderer.color = myRed;
+
+        startPos = this.transform.position;
 
         InvokeRepeating("UpdatePath", 0f, 0.25f);
     }
