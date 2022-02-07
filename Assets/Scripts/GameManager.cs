@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public AudioClip bgMusic;
     public AudioClip loseMusic;
     public AudioClip winClip;
-
     public static bool GameIsPaused = false;
     public GameObject MenuUI;
 

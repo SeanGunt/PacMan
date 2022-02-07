@@ -62,13 +62,13 @@ public class PacManController : MonoBehaviour
         // Lose requirement.
         if (lives <= 0)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
 
         // Win requirement.
         if (!GameObject.FindWithTag("Dot"))
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
         }
     }
     private void FixedUpdate()
