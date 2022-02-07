@@ -1725,7 +1725,7 @@ MonoBehaviour:
   bgMusic: {fileID: 8300000, guid: 5dc7de420acf41b4780ef9e5e99b8eb2, type: 3}
   loseMusic: {fileID: 8300000, guid: 73433f2b98ec2f643bb395071c5075dd, type: 3}
   winClip: {fileID: 8300000, guid: 00673a71b7cef7f42ac0d42c5ce085ee, type: 3}
-  PauseMenuUI: {fileID: 370844326}
+  MenuUI: {fileID: 370844326}
 --- !u!4 &580891159 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1608897647674129816, guid: 58a29e5eef0b3804996d24299003781b, type: 3}

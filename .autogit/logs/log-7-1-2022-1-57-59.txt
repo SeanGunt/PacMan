@@ -1,0 +1,21 @@
+-------------------- Auto-Git Log --------------------
+		Mon Feb 07 2022 01:57:59 GMT-0500 (Eastern Standard Time)
+------------------------------------------------------
+
+Modified files:
+* Assets/Scenes/GameOver.unity
+* Assets/Scenes/Level1.unity
+* Assets/Scenes/YouWin.unity
+* Assets/Scripts/GameManager.cs
+* ProjectSettings/EditorBuildSettings.asset
+* UserSettings/EditorUserSettings.asset
+
+
+Created files:
+* .autogit/logs/log-7-1-2022-1-27-39.txt
+
+
+Deleted files:
+
+
+Renamed files:
