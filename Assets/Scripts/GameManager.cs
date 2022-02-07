@@ -29,4 +29,15 @@ public class GameManager : MonoBehaviour
             audioSource.Play();
         }
     }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("game quit");
+        Application.Quit();
+    }
 }
