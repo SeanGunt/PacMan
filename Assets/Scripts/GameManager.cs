@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public AudioClip winClip;
 
     public static bool GameIsPaused = false;
-    public GameObject PauseMenuUI;
+    public GameObject MenuUI;
 
     void Awake()
     {  
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("Level1");
-        GameIsPaused = false;
+
     }
 
     public void QuitGame()
@@ -63,19 +63,20 @@ public class GameManager : MonoBehaviour
 
     void Pause()
     {
-        PauseMenuUI.SetActive(true);
+        MenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
     
     public void Resume()
     {
-        PauseMenuUI.SetActive(false);
+        MenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
     public void LoadMenu()
     {
+        Resume();
         SceneManager.LoadScene("Menu");
     }
 }
