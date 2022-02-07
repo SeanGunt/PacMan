@@ -1,0 +1,21 @@
+-------------------- Auto-Git Log --------------------
+		Mon Feb 07 2022 00:57:17 GMT-0500 (Eastern Standard Time)
+------------------------------------------------------
+
+Modified files:
+* Assets/Gold.asset
+* Assets/Scenes/Menu.unity
+* Assets/Scripts/GameManager.cs
+* "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset"
+
+
+Created files:
+* .autogit/logs/log-7-1-2022-0-26-57.txt
+
+
+Deleted files:
+
+
+Renamed files:
+* [object Object]
+* [object Object]

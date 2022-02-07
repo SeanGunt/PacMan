@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     public AudioClip bgMusic;
     public AudioClip loseMusic;
     public AudioClip winClip;
+
+    public static bool GameIsPaused = false;
+    public GameObject PauseMenuUI;
+
     void Awake()
     {  
         audioSource = GetComponent<AudioSource>();
@@ -30,14 +34,48 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene("Level1");
+        GameIsPaused = false;
     }
 
     public void QuitGame()
     {
         Debug.Log("game quit");
         Application.Quit();
+    }
+
+    void Pause()
+    {
+        PauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
+    
+    public void Resume()
+    {
+        PauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+    }
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
