@@ -22,7 +22,7 @@ public class PacManController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         livesText.text = "Lives: " + lives.ToString();
-        scoreText.text = score.ToString();
+        scoreText.text = "Score: " + score.ToString();
         
         startPos = this.transform.position;
     }
@@ -61,11 +61,11 @@ public class PacManController : MonoBehaviour
             SceneManager.LoadScene(2);
         }
 
-        // Win requirement.
-        if (!GameObject.FindWithTag("Dot"))
-        {
-            SceneManager.LoadScene(3);
-        }
+        // Win requirement. 
+            if (!GameObject.FindWithTag("Dot"))
+            {
+                SceneManager.LoadScene(3);
+            }
     }
     private void FixedUpdate()
     {
@@ -133,7 +133,8 @@ public class PacManController : MonoBehaviour
         if (other.tag == "Dot")
         {
             score += 10;
-            scoreText.text = score.ToString();
+            scoreText.text = "Score: " + score.ToString();
+            audioSource.PlayOneShot(pickup);
             Destroy(other.gameObject);
         }
 

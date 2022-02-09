@@ -31,6 +31,12 @@ public class GameManager : MonoBehaviour
             audioSource.clip = winClip;
             audioSource.Play();
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            audioSource.clip = bgMusic;
+            audioSource.Play();
+        }
     }
 
     void Update()
