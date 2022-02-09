@@ -11,6 +11,18 @@ TagManager:
   - Ghost1
   - TelLeft
   - TelRight
+  - Cloudy
+  - Bolt
+  - Drip
+  - Flakey
+  - CloudyStart
+  - FlakeyStart
+  - DripStart
+  - BoltStart
+  - FlakeyScatter
+  - BoltScatter
+  - DripScatter
+  - CloudyScatter
   layers:
   - Default
   - TransparentFX

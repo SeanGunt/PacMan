@@ -1,36 +1,21 @@
 using UnityEngine;
 using Pathfinding;
 
-public class EnemyAI : MonoBehaviour
+public class BoltAI : MonoBehaviour
 {
     public static Transform target;
     public static float enemySpeed = 1000f;
-    public float nextWaypointDistance = 3f;
+    float nextWaypointDistance = 1.2f;
     Path path;
     int currentWaypoint = 0;
     Seeker seeker;
     Rigidbody2D rigidbody2d;
-    public static BoxCollider2D boxCollider2d;
-    public static SpriteRenderer enemySpriteRenderer;
-    public static Color myRed;
-    public static Color myBlue;
-    public static Vector2 startPos;
 
     void Awake()
     {
         target = GameObject.FindWithTag("PacMan").transform;
-
         seeker = GetComponent<Seeker>();
-        enemySpriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2d = GetComponent<Rigidbody2D>();
-        boxCollider2d = GetComponent<BoxCollider2D>();
-
-        myRed = new Color(1f,0.25f,0.15f,1f);
-        myBlue = new Color(0.25f,0.25f,0.75f,1f);
-        enemySpriteRenderer.color = myRed;
-
-        startPos = this.transform.position;
-
         InvokeRepeating("UpdatePath", 0f, 0.25f);
     }
     void OnPathComplete(Path p)
