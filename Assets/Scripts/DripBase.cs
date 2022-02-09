@@ -3,15 +3,17 @@ using UnityEngine;
 public class DripBase : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
-    public float homeTimer = 5.0f;
-    public float chaseTimer = 60.0f;
-    public float scatterTimer = 15.0f;
+    public float homeTimer = 7.5f;
+    public float chaseTimer = 20.0f;
+    public float scatterTimer = 8.0f;
     public float homeDirectionTimer = 1.0f;
-    public float homeSpeed = 0.20f;
-    int homeDirection = 1;
+    public float homeSpeed = 1.0f;
+    public static float frightenedTimer = 5.0f;
+    public static int homeDirection = 1;
     public static bool home;
     public static bool chase;
     public static bool scatter;
+    public static bool frightened;
     public static SpriteRenderer enemySpriteRenderer;
     public static Color myBlue;
     public static Color myWhite;
@@ -23,20 +25,25 @@ public class DripBase : MonoBehaviour
         home = true;
         chase = false;
         scatter = false;
+        frightened = false;
 
         rigidbody2d = GetComponent<Rigidbody2D>();
         boxCollider2d = GetComponent<BoxCollider2D>();
         enemySpriteRenderer = GetComponent<SpriteRenderer>();
-
         myBlue = new Color(0.25f,0.25f,0.75f,1f);
         myWhite = Color.white;
         enemySpriteRenderer.color = myWhite;
-
         startPos = this.transform.position;
     }
     public void Home()
     {   
         DripAI.enemySpeed = 0f;
+
+        scatter = false;
+        chase = false;
+
+        enemySpriteRenderer.color = myWhite;
+
         homeDirectionTimer -= Time.deltaTime;
 
         if (homeDirectionTimer <= 0)
@@ -52,8 +59,10 @@ public class DripBase : MonoBehaviour
 
         if (homeTimer <= 0)
         {
-            DripAI.enemySpeed = 1000.0f;
-            homeTimer = 11.0f;
+            homeDirectionTimer = 1.0f;
+            homeDirection = 1;
+            DripAI.enemySpeed = 700.0f;
+            homeTimer = 7.5f;
             home = false;
             scatter = true;
         }
@@ -63,11 +72,13 @@ public class DripBase : MonoBehaviour
     void Scatter()
     {
         DripAI.target = GameObject.FindWithTag("DripScatter").transform;
+
         scatterTimer -= Time.deltaTime;
+
         if (scatterTimer <= 0)
         {
-            DripAI.enemySpeed = 1000.0f;
-            scatterTimer = 15.0f;
+            DripAI.enemySpeed = 700.0f;
+            scatterTimer = 8.0f;
             chase =  true;
             scatter = false;
         }
@@ -75,13 +86,34 @@ public class DripBase : MonoBehaviour
     void Chase()
     {
         DripAI.target = GameObject.FindWithTag("PacMan").transform;
+
         chaseTimer -= Time.deltaTime;
+
         if (chaseTimer <= 0)
         {
-            DripAI.enemySpeed = 1000.0f;
+            DripAI.enemySpeed = 700.0f;
             chaseTimer = 20.0f;
             chase = false;
             scatter = true;
+        }
+    }
+    void Frightened()
+    {
+        chase = false;
+        scatter = false;
+
+        frightenedTimer -= Time.deltaTime;
+
+        DripAI.target = GameObject.FindWithTag("DripStart").transform;
+        enemySpriteRenderer.color = myBlue;
+
+        if (frightenedTimer <= 0)
+        {
+            enemySpriteRenderer.color = myWhite;;
+            DripAI.enemySpeed = 700.0f;
+            frightened = false;
+            chase = true;
+            frightenedTimer = 5.0f;
         }
     }
     void FixedUpdate()
@@ -99,6 +131,10 @@ public class DripBase : MonoBehaviour
         if (chase)
         {
             Chase();
+        }
+        if (frightened)
+        {
+            Frightened();
         }
     }
 }

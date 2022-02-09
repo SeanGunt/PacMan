@@ -4,7 +4,7 @@ using Pathfinding;
 public class FlakeyAI : MonoBehaviour
 {
     public static Transform target;
-    public static float enemySpeed = 1000f;
+    public static float enemySpeed = 850.0f;
     float nextWaypointDistance = 1.2f;
     Path path;
     int currentWaypoint = 0;

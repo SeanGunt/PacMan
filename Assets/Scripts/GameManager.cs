@@ -16,25 +16,19 @@ public class GameManager : MonoBehaviour
     {  
         audioSource = GetComponent<AudioSource>();
         
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2)
         {
             audioSource.clip = bgMusic;
-            audioSource.Play();
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            audioSource.clip = loseMusic;
             audioSource.Play();
         }
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
-            audioSource.clip = winClip;
+            audioSource.clip = loseMusic;
             audioSource.Play();
         }
-
         if (SceneManager.GetActiveScene().buildIndex == 4)
         {
-            audioSource.clip = bgMusic;
+            audioSource.clip = winClip;
             audioSource.Play();
         }
     }

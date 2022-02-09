@@ -3,15 +3,17 @@ using UnityEngine;
 public class CloudyBase : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
-    public float homeTimer = 5.0f;
-    public float chaseTimer = 60.0f;
-    public float scatterTimer = 15.0f;
+    public float homeTimer = 7.5f;
+    public float chaseTimer = 20.0f;
+    public float scatterTimer = 8.0f;
     public float homeDirectionTimer = 1.0f;
-    public float homeSpeed = 0.20f;
-    int homeDirection = 1;
+    public float homeSpeed = 1.0f;
+    public static float frightenedTimer = 5.0f;
+    public static int homeDirection = 1;
     public static bool home;
     public static bool chase;
     public static bool scatter;
+    public static bool frightened;
     public static SpriteRenderer enemySpriteRenderer;
     public static Color myBlue;
     public static Color myWhite;
@@ -23,20 +25,25 @@ public class CloudyBase : MonoBehaviour
         home = true;
         chase = false;
         scatter = false;
+        frightened = false;
 
         rigidbody2d = GetComponent<Rigidbody2D>();
         boxCollider2d = GetComponent<BoxCollider2D>();
         enemySpriteRenderer = GetComponent<SpriteRenderer>();
-
         myBlue = new Color(0.25f,0.25f,0.75f,1f);
         myWhite = Color.white;
         enemySpriteRenderer.color = myWhite;
-
         startPos = this.transform.position;
     }
     public void Home()
     {   
         CloudyAI.enemySpeed = 0f;
+
+        scatter = false;
+        chase = false;
+
+        enemySpriteRenderer.color = myWhite;
+
         homeDirectionTimer -= Time.deltaTime;
 
         if (homeDirectionTimer <= 0)
@@ -52,8 +59,10 @@ public class CloudyBase : MonoBehaviour
 
         if (homeTimer <= 0)
         {
-            CloudyAI.enemySpeed = 1000.0f;
-            homeTimer = 9.0f;
+            homeDirectionTimer = 1.0f;
+            homeDirection = 1;
+            CloudyAI.enemySpeed = 900.0f;
+            homeTimer = 7.5f;
             home = false;
             scatter = true;
         }
@@ -63,11 +72,13 @@ public class CloudyBase : MonoBehaviour
     void Scatter()
     {
         CloudyAI.target = GameObject.FindWithTag("CloudyScatter").transform;
+
         scatterTimer -= Time.deltaTime;
+
         if (scatterTimer <= 0)
         {
-            CloudyAI.enemySpeed = 1000.0f;
-            scatterTimer = 15.0f;
+            CloudyAI.enemySpeed = 900.0f;
+            scatterTimer = 8.0f;
             chase =  true;
             scatter = false;
         }
@@ -75,13 +86,34 @@ public class CloudyBase : MonoBehaviour
     void Chase()
     {
         CloudyAI.target = GameObject.FindWithTag("PacMan").transform;
+
         chaseTimer -= Time.deltaTime;
+
         if (chaseTimer <= 0)
         {
-            CloudyAI.enemySpeed = 1000.0f;
+            CloudyAI.enemySpeed = 900.0f;
             chaseTimer = 20.0f;
             chase = false;
             scatter = true;
+        }
+    }
+    void Frightened()
+    {
+        chase = false;
+        scatter = false;
+
+        frightenedTimer -= Time.deltaTime;
+
+        CloudyAI.target = GameObject.FindWithTag("CloudyStart").transform;
+        enemySpriteRenderer.color = myBlue;
+
+        if (frightenedTimer <= 0)
+        {
+            enemySpriteRenderer.color = myWhite;;
+            CloudyAI.enemySpeed = 900.0f;
+            frightened = false;
+            chase = true;
+            frightenedTimer = 5.0f;
         }
     }
     void FixedUpdate()
@@ -99,6 +131,10 @@ public class CloudyBase : MonoBehaviour
         if (chase)
         {
             Chase();
+        }
+        if (frightened)
+        {
+            Frightened();
         }
     }
 }
