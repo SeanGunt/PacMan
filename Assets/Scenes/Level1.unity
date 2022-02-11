@@ -1114,7 +1114,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 156631e0081c54c44b20b990716e3720, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5954,7 +5954,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d41259837605ae740b264f7afa9f76ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6927,7 +6927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -70, y: -33}
+  m_AnchoredPosition: {x: -754.5, y: -349.9}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &603865325
@@ -6943,7 +6943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.745283, g: 0.17928976, b: 0.17928976, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7486,6 +7486,11 @@ PolygonCollider2D:
       - {x: 0.765, y: -0.51}
       - {x: 0.875, y: -0.34}
       - {x: 0.97499996, y: -0.29}
+--- !u!1 &664574053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5508396131538796255, guid: 6f7fede0c0c14c448901a1aeb74a3865, type: 3}
+  m_PrefabInstance: {fileID: 9084947192323951342}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &668936747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9360,7 +9365,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e13b90d221888d2468481220ce64008a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -14262,7 +14267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -88.2, y: -294.9}
+  m_AnchoredPosition: {x: -64, y: -349}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1243528512
@@ -14278,7 +14283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.764151, g: 0.2270826, b: 0.2270826, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18295,7 +18300,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8adc80732c5820547989a881c3bb4608, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -24500,6 +24505,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5508396131538796255, guid: 6f7fede0c0c14c448901a1aeb74a3865, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007973749625761817, guid: 6f7fede0c0c14c448901a1aeb74a3865, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007973749625761817, guid: 6f7fede0c0c14c448901a1aeb74a3865, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007973749625761817, guid: 6f7fede0c0c14c448901a1aeb74a3865, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007973749625761817, guid: 6f7fede0c0c14c448901a1aeb74a3865, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9084947191978499373, guid: 6f7fede0c0c14c448901a1aeb74a3865, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -24552,6 +24577,10 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1243528512}
+    - target: {fileID: 9084947191978499374, guid: 6f7fede0c0c14c448901a1aeb74a3865, type: 3}
+      propertyPath: solarFlare
+      value: 
+      objectReference: {fileID: 664574053}
     - target: {fileID: 9084947191978499410, guid: 6f7fede0c0c14c448901a1aeb74a3865, type: 3}
       propertyPath: m_Name
       value: PacMan

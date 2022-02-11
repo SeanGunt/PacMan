@@ -15,14 +15,20 @@ public class PacManController : MonoBehaviour
     public AudioClip pickup;
     public AudioClip loseMusic;
     GameObject pellets;
-    public GameObject solarflarePrefab;
+    private Animator animator;
+    public GameObject solarFlare;
+    private bool isFlared;
+    private float flaredTimer = 5.0f;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
 
         livesText.text = "Lives: " + lives.ToString();
         scoreText.text = "Score: " + score.ToString();
+
+        solarFlare.SetActive(false);
         
         startPos = this.transform.position;
     }
@@ -47,6 +53,19 @@ public class PacManController : MonoBehaviour
         {
             direction = Vector2.left;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 180.0f);
+        }
+
+        if (isFlared)
+        {
+            solarFlare.SetActive(true);
+            flaredTimer -= Time.deltaTime;
+
+            if (flaredTimer <= 0)
+            {
+                flaredTimer = 5.0f;
+                isFlared = false;
+                solarFlare.SetActive(false);
+            }
         }
 
         if (lives <= 0)
@@ -99,7 +118,7 @@ public class PacManController : MonoBehaviour
         {
             Destroy(other.gameObject);
             audioSource.PlayOneShot(pickup);
-            GameObject solarflareObject = Instantiate(solarflarePrefab);
+            isFlared = true;
 
             CloudyBase.frightened = true;
             BoltBase.frightened = true;
