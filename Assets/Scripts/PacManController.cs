@@ -15,6 +15,8 @@ public class PacManController : MonoBehaviour
     public AudioClip pickup;
     public AudioClip loseMusic;
     GameObject pellets;
+    public GameObject solarflarePrefab;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -97,6 +99,7 @@ public class PacManController : MonoBehaviour
         {
             Destroy(other.gameObject);
             audioSource.PlayOneShot(pickup);
+            GameObject solarflareObject = Instantiate(solarflarePrefab);
 
             CloudyBase.frightened = true;
             BoltBase.frightened = true;
